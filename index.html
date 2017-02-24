@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jiragramm</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div id="login-form">
+		<h1 class="logo">Jiragram</h1>
+		<div class="wrapper error hide"></div>
+		<div class="wrapper">
+			<label for="ju">Jira URL:</label>
+			<input type="text" id="ju" value="https://kartenmacherei.atlassian.net" />
+		</div>
+		<div class="wrapper">
+			<label for="jl">Jira login:</label>
+			<input type="text" id="jl" value="" />
+		</div>
+		<div class="wrapper">
+			<label for="jp">Jira password:</label>
+			<input type="password" id="jp" value="" />
+		</div>
+		<div class="wrapper">
+			<input type="submit"value="Let's go" />
+		</div>
+	</div>
+
+	<div id="controls" class="hide">
+
+		<strong class="greet">Hello, <span class="username"></span>!</strong>
+
+		<label for="project">Project:</label>
+		<select id="project">
+			<option value="false">Select project</option>
+		</select>
+		<label for="maxResults">Issues amount:</label>
+		<select id="maxResults">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="500">500</option>
+			<option value="10000">All</option>
+		</select>
+		<ul id="legend"></ul>
+	</div>
+
+	<div id="loading" class="hide">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>

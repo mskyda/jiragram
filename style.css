@@ -1,0 +1,254 @@
+html,
+body{
+	margin: 0;
+	height: 100%;
+	font-size: 14px;
+	line-height: 23px;
+}
+
+.wrapper{
+	width: 100%;
+	overflow: hidden;
+}
+
+.hide{display: none !important;}
+
+#login-form{
+	position: relative;
+	width: 400px;
+	padding: 10px 20px 0;
+	margin: -90px auto 0;
+	top: 50%;
+	border: 1px solid #ccc;
+	background: #fff;
+	box-shadow: 0 0 10px #ccc;
+	text-align: center;
+}
+
+#login-form h1{
+	margin: 0 0 20px;
+	font-family: monospace;
+}
+
+#login-form .wrapper{padding: 0 0 10px;}
+
+#login-form .error{
+	font-weight: bold;
+	color: #f00;
+}
+
+#login-form label {
+	float: left;
+	width: 25%;
+	text-align: left;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"]{
+	float: left;
+	width: 73%;
+	font-size: 14px;
+}
+
+#login-form input[type="submit"]{
+	font-size: 14px;
+}
+
+#controls{
+	height: 20px;
+	width: calc(100% - 10px);
+	padding: 5px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: #000;
+	color: #fff;
+	line-height: 18px;
+}
+
+#controls label,
+#controls select,
+#controls strong{float:left;}
+
+#controls strong,
+#controls select{margin: 0 10px;}
+
+#controls #legend{
+	float:left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#controls #legend li{
+	float: left;
+	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	margin: -5px 0;
+	text-shadow: 0 0 5px #000;
+}
+
+.link.none{display: none;}
+
+li.type1{background: red;}
+
+circle.type1{fill: red;}
+
+.link.type1{stroke: red;}
+
+
+li.type2{background: orange;}
+
+circle.type2{fill: orange;}
+
+.link.type2{stroke: orange;}
+
+
+li.type3{background: yellow;}
+
+circle.type3{fill: yellow;}
+
+.link.type3{stroke: yellow;}
+
+
+li.type4{background: greenyellow;}
+
+circle.type4{fill: greenyellow;}
+
+.link.type4{stroke: greenyellow;}
+
+
+li.type5{background: green;}
+
+circle.type5{fill: green;}
+
+.link.type5{stroke: green;}
+
+
+li.type6{background :deepskyblue;}
+
+circle.type6{fill: deepskyblue;}
+
+.link.type6{stroke: deepskyblue;}
+
+
+li.type7{background :blue;}
+
+circle.type7{fill: blue;}
+
+.link.type7{stroke: blue;}
+
+
+li.type8{background: purple;}
+
+circle.type8{fill: purple;}
+
+.link.type8{stroke: purple;}
+
+
+li.type9{background: deeppink;}
+
+circle.type9{fill: deeppink;}
+
+.link.type9{stroke: deeppink;}
+
+
+li.type10{background: lightpink;}
+
+circle.type10{fill: lightpink;}
+
+.link.type10{stroke: lightpink;}
+
+
+li.type11{background: rosybrown;}
+
+circle.type11{fill: rosybrown;}
+
+.link.type11{stroke: rosybrown;}
+
+
+li.type12{background: brown;}
+
+circle.type12{fill: brown;}
+
+.link.type12{stroke: brown;}
+
+
+li.type13{background: silver;}
+
+circle.type13{fill: silver;}
+
+.link.type13{stroke: silver;}
+
+
+#loading{
+	background: rgba(0,0,0, 0.3);
+	position: fixed;
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+.spinner {
+	width: 500px;
+	height: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+}
+
+.double-bounce1, .double-bounce2 {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: #333;
+	opacity: 0.3;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	-webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+	animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+	-webkit-animation-delay: -1.0s;
+	animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+	0%, 100% { -webkit-transform: scale(0.0) }
+	50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+	0%, 100% {
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	} 50% {
+		  transform: scale(1.0);
+		  -webkit-transform: scale(1.0);
+	  }
+}
+
+.link{
+	fill: none;
+	stroke: #666;
+	stroke-width: 2px;
+}
+
+circle{
+	stroke: #333;
+	stroke-width: 2px;
+}
+
+text{
+	font: 10px sans-serif;
+	pointer-events: none;
+	text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
