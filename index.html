@@ -2,35 +2,32 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>jiragramm</title>
+	<title>Jiragram</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-	<div id="login-form">
+	<div id="start-form">
 		<h1 class="logo">Jiragram</h1>
-		<div class="wrapper error hide"></div>
+		<div class="wrapper hide" id="error"></div>
 		<div class="wrapper">
-			<label for="ju">Jira URL:</label>
-			<input type="text" id="ju" value="https://kartenmacherei.atlassian.net" />
+			<label for="ju">Project URL:</label>
+			<input type="text" id="ju" value="https://" />
+		</div>
+		<div class="wrapper hide login-field">
+			<label for="jl">Login:</label>
+			<input type="text" id="jl" />
+		</div>
+		<div class="wrapper hide login-field">
+			<label for="jp">Password:</label>
+			<input type="password" id="jp" />
 		</div>
 		<div class="wrapper">
-			<label for="jl">Jira login:</label>
-			<input type="text" id="jl" value="" />
-		</div>
-		<div class="wrapper">
-			<label for="jp">Jira password:</label>
-			<input type="password" id="jp" value="" />
-		</div>
-		<div class="wrapper">
-			<input type="submit"value="Let's go" />
+			<input type="submit"value="Go" />
 		</div>
 	</div>
 
 	<div id="controls" class="hide">
-
-		<strong class="greet">Hello, <span class="username"></span>!</strong>
-
 		<label for="project">Project:</label>
 		<select id="project">
 			<option value="false">Select project</option>
@@ -41,7 +38,6 @@
 			<option value="20">20</option>
 			<option value="50">50</option>
 			<option value="100">100</option>
-			<option value="500">500</option>
 			<option value="10000">All</option>
 		</select>
 		<ul id="legend"></ul>

@@ -2,18 +2,17 @@ var jiragram = {
 
 	init: function(){
 
-		jQuery('#login-form input[type="submit"]').on('click', this.onLogin.bind(this));
+		jQuery('#start-form [type="submit"]').on('click', this.onSubmit.bind(this));
 
 		jQuery(document).on('dblclick', 'circle', this.openIssue.bind(this));
 
 	},
 
-	onLogin: function(e){
+	onSubmit: function(e){
 
 		e.preventDefault();
 
-		var inputs = jQuery('#login-form input[id]'),
-			formData = {}, val;
+		var inputs = jQuery('#start-form input[id]'), formData = {}, val;
 
 		inputs.each(jQuery.proxy(function(i, el){
 
@@ -21,23 +20,15 @@ var jiragram = {
 
 			val = el.val();
 
-			if(val === ''){
+			if(val !== '') {
 
-				this.toggleErrorMsg('All fields are required!');
-
-				return;
-
-			}
-
-			formData[el.attr('id')] = val;
-
-			if(i === inputs.length - 1){
-
-				this.sendRequest(formData);
+				formData[el.attr('id')] = val;
 
 			}
 
 		}, this));
+
+		this.sendRequest(formData);
 
 	},
 
@@ -47,15 +38,11 @@ var jiragram = {
 
 		var link = jQuery(e.currentTarget).attr('rel');
 
-		if(link) window.open(link, '_blank');
+		if(link) {
 
-	},
+			window.open(link, '_blank');
 
-	toggleErrorMsg: function(msg){
-
-		var msgHolder = jQuery('#login-form .error').empty().addClass('hide');
-
-		if(msg) msgHolder.text(msg).removeClass('hide');
+		}
 
 	},
 
@@ -69,17 +56,9 @@ var jiragram = {
 
 			success: jQuery.proxy(function(resp){
 
-				if(resp.indexOf('Unauthorized (401)') !== -1){
+				this.resetDOM();
 
-					this.toggleErrorMsg('Login/password combination is wrong. Check credentials.');
-
-				} else {
-
-					this.onRequestSuccess(resp, data);
-
-				}
-
-				jQuery('#loading').addClass('hide');
+				this.parseResponse(resp, data);
 
 			}, this)
 
@@ -87,17 +66,55 @@ var jiragram = {
 
 	},
 
+	resetDOM: function(){
+
+		jQuery('#loading').addClass('hide');
+
+		if(!this.session){
+
+			jQuery('#error, .login-field').addClass('hide');
+
+		}
+
+	},
+
+	parseResponse: function(resp, data){
+
+		if(resp.indexOf('cURL Error') !== -1 || resp.indexOf('301 Moved Permanently') !== -1){
+
+			jQuery('#error').text('Request error. Check URL').removeClass('hide');
+
+		} else if(resp.indexOf('Unauthorized (401)') !== -1){
+
+			jQuery('#error').text('Login failed. Check credentials').removeClass('hide');
+
+			jQuery('.login-field').removeClass('hide');
+
+		} else if(resp === '[]'){
+
+			jQuery('#error').text('Project is private. Log in').removeClass('hide');
+
+			jQuery('.login-field').removeClass('hide');
+
+		} else {
+
+			this.onRequestSuccess(resp, data);
+
+		}
+
+	},
+
 	onRequestSuccess: function(resp, data){
 
 		resp = JSON.parse(resp);
 
-		if(!this.cached){
+		if(!this.session){
 
-			this.cached = data;
+			this.session = data;
 
 			this.renderOptions(resp);
 
-			jQuery('#login-form').addClass('hide');
+			jQuery('#start-form').addClass('hide');
 
 		} else {
 
@@ -111,9 +128,9 @@ var jiragram = {
 
 	prepareRequest: function(data){
 
-		data = jQuery.extend(true, {}, this.cached || data);
+		data = jQuery.extend(true, {}, this.session || data);
 
-		if(!this.cached){ // initial load - load projects list
+		if(!this.session){ // initial load - load projects list
 
 			data.ju += '/rest/api/2/project';
 
@@ -150,8 +167,6 @@ var jiragram = {
 
 		jQuery('#project').append(projectsHTML);
 
-		controls.find('.greet .username').text(this.cached.jl);
-
 		controls.find('select').on('change', this.sendRequest.bind(this));
 
 	},
@@ -182,11 +197,9 @@ var jiragram = {
 
 		this.categories = {};
 
-		var line = this.renderLine(svg, force);
-
-		var node = this.renderNode(svg, force);
-
-		var text = this.renderText(svg, force);
+		var line = this.renderLine(svg, force),
+			node = this.renderNode(svg, force),
+			text = this.renderText(svg, force);
 
 		function tick() {
 			line.attr('d', function(d){
@@ -244,7 +257,7 @@ var jiragram = {
 					.attr('width', 48)
 					.attr('height', 48)
 					.append('image')
-					.attr('xlink:href', this.cached.ju + '/secure/useravatar?&ownerId=' + nodes[key].name)
+					.attr('xlink:href', this.session.ju + '/secure/useravatar?&ownerId=' + nodes[key].name)
 					.attr('width', 48)
 					.attr('height', 48);
 
@@ -271,7 +284,7 @@ var jiragram = {
 			.enter().append('circle')
 			.attr('r', function(d) { return d.type === 'target' ? 24 : 8 })
 			.attr('class', jQuery.proxy(function(d) {return d.type === 'target' ? '' : this.categoriseType(d.type)}, this))
-			.attr('rel', jQuery.proxy(function(d) { return this.cached.ju + (d.type === 'target' ? '/secure/ViewProfile.jspa?name=' : '/browse/') + d.name; }, this))
+			.attr('rel', jQuery.proxy(function(d) { return this.session.ju + (d.type === 'target' ? '/secure/ViewProfile.jspa?name=' : '/browse/') + d.name; }, this))
 			.attr('fill', function(d) { return d.type === 'target' ? 'url(#' + d.name + ')' : '#ccc'; })
 			.call(force.drag);
 

@@ -13,7 +13,7 @@ body{
 
 .hide{display: none !important;}
 
-#login-form{
+#start-form{
 	position: relative;
 	width: 400px;
 	padding: 10px 20px 0;
@@ -25,32 +25,32 @@ body{
 	text-align: center;
 }
 
-#login-form h1{
+#start-form h1{
 	margin: 0 0 20px;
 	font-family: monospace;
 }
 
-#login-form .wrapper{padding: 0 0 10px;}
+#start-form .wrapper{padding: 0 0 10px;}
 
-#login-form .error{
+#error{
 	font-weight: bold;
 	color: #f00;
 }
 
-#login-form label {
+#start-form label {
 	float: left;
 	width: 25%;
 	text-align: left;
 }
 
-#login-form input[type="text"],
-#login-form input[type="password"]{
+#start-form input[type="text"],
+#start-form input[type="password"]{
 	float: left;
 	width: 73%;
 	font-size: 14px;
 }
 
-#login-form input[type="submit"]{
+#start-form input[type="submit"]{
 	font-size: 14px;
 }
 
