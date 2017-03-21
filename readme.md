@@ -1,3 +1,3 @@
-#*Jiragram*
-
-####*Jira rest API and D3.js*
+Jiragram
+---------------
+Jira REST API and D3.js
